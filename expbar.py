@@ -32,8 +32,19 @@ circle = circles[0][0]#extract the circle
 print (circle)
 ROI = img[int(circle[1]-circle[2]-5):int(circle[1]+circle[2]+5),int(circle[0]+20):int(circle[0]+circle[2]+20)]
 
-# Show the result
-result = ROI
+################ Extract the EXP bar #################
+# Transform to HSV color space
+ROI_HSV = cv2.cvtColor(ROI, cv2.COLOR_BGR2HSV)
+# inRange Thresholding(extract color purple) to extract the bar
+dark_purple = (130, 160, 0)
+light_purple = (140, 255, 255)
+exp_extracting = cv2.inRange(ROI_HSV, dark_purple, light_purple)
 
-plt.imshow(result)
+
+# Show the result
+result = exp_extracting
+plt.figure()
+plt.imshow(img)#show the image
+plt.figure()
+plt.imshow(result)#show the result
 plt.show()
