@@ -19,7 +19,7 @@ circles = cv2.HoughCircles(edge, #input picture
                             param1=50,param2=30,
                             minRadius=48,maxRadius=62)
 #print(circles)
-
+'''
 if circles is not None:
     for i in circles[0,:]:
         if (588 <= i[0] <= 596)and(996 <= i[0] <= 1000): 
@@ -27,7 +27,7 @@ if circles is not None:
             cv2.circle(img,(i[0],i[1]),i[2],(0,255,0),2)
             # draw the center of the circle
             cv2.circle(img,(i[0],i[1]),2,(0,0,255),3)
-
+'''
 ################ 4.Region of Interest(ROI) ################
 circle = circles[0][0]#extract the circle
 print (circle)
@@ -59,19 +59,25 @@ exp_circles = cv2.HoughCircles(ROI_edge, #input picture
                             param1=30,param2=20,
                             minRadius=10,maxRadius=20)
 if exp_circles is not None:
-    for i in circles[0,:]: 
+    for i in exp_circles[0,:]: 
         # draw the outer circle
         cv2.circle(img,(i[0],i[1]),i[2],(0,255,0),2)
         # draw the center of the circle
         cv2.circle(img,(i[0],i[1]),2,(0,0,255),3)
 print(exp_circles)
 ############## 2. Crop the Number area ################
-
+low = (0, 0, 200)
+high = (180, 5, 255)
+level_ext = cv2.inRange(ROI_HSV, low, high)
 ############## 3. Textualize the Number ###############
 
 #################### 7.Images ###################
 result = exp_extracting
+plt.imshow(level_ext)
+plt.show()
+'''
 cv2.imshow('result', result)
 cv2.imshow('ROI', ROI_edge)
 cv2.waitKey(0)
+'''
 
