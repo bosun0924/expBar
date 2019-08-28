@@ -72,7 +72,7 @@ def main():
     high = (180, 5, 255)
     level_ext = cv2.inRange(ROI_HSV, low, high)
     ############## 3. Textualize the Number ###############
-    print(func1(level_ext))
+    print(get_text(level_ext))
     #################### Images ###################
     result = exp_extracting
 
